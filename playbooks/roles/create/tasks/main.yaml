@@ -1,0 +1,60 @@
+---
+# - name: Query Interface Selector from Interface Profile
+#   cisco.aci.aci_interface_policy_leaf_profile:
+#     host: "198.18.133.200"
+#     username: admin
+#     password: C1sco12345
+#     validate_certs: no
+#     interface_profile: "SFP-105"
+#     description:  leafintprfname description
+#     # state: query
+#   register: query_result
+
+- name: "Delete duplicate Interface Selector in Interface Profile"
+  aci_rest:     
+    hostname: "198.18.133.200"
+    username: admin
+    password: C1sco12345
+    validate_certs: no
+    method: post
+    path: "/api/mo/uni/infra.json"
+    content:
+      infraAccPortP:
+        attributes:
+          name: IPF-101
+        children:
+          - infraHPortS:
+              attributes:
+                name: IST-11
+                type: range
+                status: deleted
+
+- name: "Create Interface Selector in Interface Profile"
+  aci_rest:     
+    hostname: "198.18.133.200"
+    username: admin
+    password: C1sco12345
+    validate_certs: no
+    method: post
+    path: "/api/mo/uni/infra.json"
+    content:
+      infraAccPortP:
+        attributes:
+          name: IPF-101
+        children:
+          - infraHPortS:
+              attributes:
+                name: IST-15
+                type: range
+              children:
+                - infraPortBlk:
+                    attributes:
+                      name: "IPF-101-IST-15-from-1-15-to-1-15"
+                      fromCard: "1"
+                      fromPort: "15"
+                      toCard: "1"
+                      toPort: "15"
+                - infraRsAccBaseGrp:
+                    attributes:
+                      tDn: "uni/infra/funcprof/accbundle-IPC-PC-1G"
+# {{ 'bundle' if item.type == 'vpc' or item.type == 'port_channel' else 'portgrp' }}

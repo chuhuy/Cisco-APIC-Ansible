@@ -1,1 +1,25 @@
 ---
+- name: "Deploy Static Port (Pod-{{ item.path_pod }}/Node-{{ item.path_node }}/{{ item.path_interface }}) to Endpoint Group ({{ item.endpoint_group }})"
+  aci_rest:     
+    hostname: "198.18.133.200"
+    username: admin
+    password: C1sco12345
+    validate_certs: no
+    method: post
+    path: "/api/mo/uni/tn-Tenants_AUTO.json"
+    content:
+      fvAp:
+        attributes:
+          name: "AP_AUTO_1"
+        children:
+          - fvAEPg:
+              attributes:
+                name: "EPG_AUTO_3"
+              children:
+                - fvRsPathAtt:
+                    attributes: 
+                      tDn: "topology/pod-1/paths-101/pathep-[IPC-PC-1G]"
+                      mode: "native"
+                      encap: "vlan-3"
+
+# tDn: "topology/pod-{{ item.path_pod }}/{{ 'prot' if item.path_type == 'vpc' else '' }}paths-{{ item.path_node }}/pathep-[{{ item.path_interface }}]"

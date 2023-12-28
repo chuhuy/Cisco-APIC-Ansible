@@ -4,5 +4,6 @@
   gather_facts: no
 
   roles:
-    - name: upsert_interface_selector
+    # - name: create
+    # - name: upsert_interface_selector
     - name: attach_static_port_endpoint_group
