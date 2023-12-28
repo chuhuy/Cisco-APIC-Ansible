@@ -1,0 +1,6 @@
+---
+- name: Configure Port VPC
+  hosts: cisco_apic
+  gather_facts: no
+
+  roles: {}

@@ -1,0 +1,17 @@
+---
+# Query the Interface Selector from Interface Profile
+# 
+- name: Query Interface Selector from Interface Profile
+  cisco.aci.aci_interface_policy_leaf_profile:
+    host: "198.18.133.200"
+    username: admin
+    password: C1sco12345
+    validate_certs: no
+    interface_profile: "SFP-105"
+    description:  leafintprfname description
+    # state: query
+  register: query_result
+
+- name: Print result
+  debug:
+    var: query_result
