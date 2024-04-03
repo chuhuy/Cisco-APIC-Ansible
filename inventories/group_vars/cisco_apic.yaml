@@ -1,0 +1,11 @@
+---
+tenant_name: TN-TCB
+# app_profile: ''
+# endpoint_group: ''
+# path_pod: ''     # DC: 1, DR: 2
+# path_type: ''
+# path_node: ''
+# path_interface: ''
+# mode: ''
+# vlan: ''
+

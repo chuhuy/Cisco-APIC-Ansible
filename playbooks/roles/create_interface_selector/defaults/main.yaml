@@ -1,0 +1,5 @@
+---
+interface_profile: IPF_101
+attached_card: "1"
+attached_port: "6"
+interface_profile_description: "Test Description"

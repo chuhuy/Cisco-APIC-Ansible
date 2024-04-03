@@ -1,0 +1,9 @@
+---
+tenant_name: TN-TCB
+app_profile: AP-TCB
+endpoint_group_name: EPG-3
+path_pod: 1
+path_node: '101-102'
+mode: regular     # regular / native
+vlan: 3
+path_interface: eth1/10

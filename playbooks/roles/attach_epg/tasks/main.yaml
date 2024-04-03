@@ -1,0 +1,12 @@
+---
+- name: Attach Endpoint Group for Single Port
+  include_tasks: attach_epg_single.yaml
+  when: port_type == 'SINGLE'
+
+- name: Attach Endpoint Group for Virtual Port Channel
+  include_tasks: attach_epg_vpc.yaml
+  when: port_type == 'VPC'
+
+- name: Attach Endpoint Group for Port Channel
+  include_tasks: attach_epg_pc.yaml
+  when: port_type == 'PC'

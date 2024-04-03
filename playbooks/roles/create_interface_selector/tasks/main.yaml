@@ -1,0 +1,8 @@
+---
+- name: 'Create Interface Selector for (Virtual) Port Channel'
+  include_tasks: create_ist_pc.yaml
+  when: port_type == 'PC' or port_type == 'VPC'
+
+- name: Create Interface Selector for Single Port
+  include_tasks: create_ist_single.yaml
+  when: port_type == 'SINGLE'

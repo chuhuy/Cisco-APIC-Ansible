@@ -1,6 +1,0 @@
----
-- name: Configure Port Channel
-  hosts: cisco_apic
-  gather_facts: no
-
-  roles: {}

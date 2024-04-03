@@ -1,9 +1,8 @@
 ---
-cisco_apic:
-  hosts:
-    apic_node_01:
-      ansible_host: 198.18.133.200
-      ansible_user: admin
-      ansible_password: C1sco12345
-  vars:
-    tenant_name: Tenants_AUTO
+all: {}
+# cisco_apic:
+#   hosts:
+#     apic_node_01:
+#       ansible_host: 198.18.133.200
+#       ansible_username: admin
+#       ansible_password: C1sco12345

@@ -1,0 +1,23 @@
+---
+- name: Attach Endpoint Group into Virtual Port Channel
+  cisco.aci.aci_rest:
+    hostname: "{{ apic_host }}"
+    username: "{{ apic_username }}"
+    password: "{{ apic_password }}"
+    validate_certs: no
+    method: post
+    path: "/api/mo/uni/tn-{{ tenant_name }}.json"
+    content:
+      fvAp:
+        attributes:
+          name: "{{ app_profile }}"
+        children:
+          - fvAEPg:
+              attributes:
+                name: "{{ endpoint_group_name }}"
+              children:
+                - fvRsPathAtt:
+                    attributes: 
+                      tDn: "topology/pod-{{ path_pod }}/paths-{{ path_node }}/pathep-[{{ path_interface }}]"
+                      mode: "{{ mode }}"
+                      encap: "vlan-{{ vlan }}"

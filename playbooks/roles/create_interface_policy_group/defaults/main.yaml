@@ -1,0 +1,18 @@
+---
+# Single port
+# port_type: SINGLE   # ENUM: SINGLE, PC, VPC
+# attached_entity_profile: AAEP-SVR    # AAEP-SVR
+# link_level_policy: 1GE
+
+# Virtual Port Channel
+port_type: VPC   # ENUM: SINGLE, PC, VPC
+attached_entity_profile: AAEP-SVR    # AAEP-SVR
+link_level_policy: 1GE
+device_name: DC_Server_01   # Input String params on Jenkins
+port_channel: 'LACP-ACTIVE'
+
+# Port Channel
+# port_type: PC   # ENUM: SINGLE, PC, VPC
+# attached_entity_profile: AAEP-SVR    # AAEP-SVR
+# link_level_policy: 1GE
+# port_channel: 'LACP-ACTIVE'

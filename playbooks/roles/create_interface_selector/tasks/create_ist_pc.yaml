@@ -1,0 +1,34 @@
+---
+- name: Set Interface Policy Group Name
+  set_fact: 
+    interface_profile_name: "IST-P{{ attached_port }}"
+
+- name: Create Interface Selector
+  cisco.aci.aci_rest:
+    hostname: "{{ apic_host }}"
+    username: "{{ apic_username }}"
+    password: "{{ apic_password }}"
+    validate_certs: no
+    method: post
+    path: "/api/mo/uni/infra.json"
+    content:
+      infraAccPortP:
+        attributes:
+          name: "{{ interface_profile }}"
+        children:
+          - infraHPortS:
+              attributes:
+                name: "{{ interface_profile_name }}"
+                type: range
+                descr: "{{ interface_profile_description }}"
+              children:
+                - infraPortBlk:
+                    attributes:
+                      name: "{{ interface_profile }}-{{ interface_profile_name }}-from-{{ attached_card }}-{{ attached_port }}-to-{{ attached_card }}-{{ attached_port }}"
+                      fromCard: "{{ attached_card }}"
+                      fromPort: "{{ attached_port }}"
+                      toCard: "{{ attached_card }}"
+                      toPort: "{{ attached_port }}"
+                - infraRsAccBaseGrp:
+                    attributes:
+                      tDn: "uni/infra/funcprof/accbundle-{{ interface_policy_group_name }}"

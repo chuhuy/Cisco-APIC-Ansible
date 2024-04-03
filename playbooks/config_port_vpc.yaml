@@ -3,4 +3,7 @@
   hosts: cisco_apic
   gather_facts: no
 
-  roles: {}
+  roles:
+    - name: create_interface_policy_group
+    - name: create_interface_selector
+    - name: attach_epg

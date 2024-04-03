@@ -1,1 +1,31 @@
 ---
+- name: Declare Interface Policy Group children objects
+  set_fact:
+    interface_policy_group_children:
+      - infraRsAttEntP:
+          attributes:
+            tDn: "uni/infra/attentp-{{ attached_entity_profile }}"
+      - infraRsCdpIfPol:
+          attributes:
+            tnCdpIfPolName: CDP-OFF
+      - infraRsLldpIfPol:
+          attributes:
+            tnLldpIfPolName: LLDP-ON
+      - infraRsL2IfPol:
+          attributes:
+            tnL2IfPolName: default
+      - infraRsHIfPol:
+          attributes:
+            tnFabricHIfPolName: "{{ link_level_policy }}"
+
+- name: Create Interface Policy Group for Virtual Port Channel
+  include_tasks: create_ipg_vpc.yaml
+  when: port_type == 'VPC'
+
+- name: Create Interface Policy Group for Port Channel
+  include_tasks: create_ipg_pc.yaml
+  when: port_type == 'PC'
+
+- name: Create Interface Policy Group for Single Port
+  include_tasks: create_ipg_single.yaml
+  when: port_type == 'SINGLE'

@@ -1,0 +1,28 @@
+---
+- name: Set Interface Policy Group Name
+  set_fact: 
+    interface_policy_group_name: "IPG-VPC-{{ link_level_policy }}-{{ device_name }}"
+
+- name: Define LACP Port Channel
+  set_fact:
+    interface_policy_group_children:
+      - "{{ interface_policy_group_children }}"
+      - infraRsLacpPol:
+          attributes:
+            tnLacpLagPolName: "{{ port_channel }}"
+
+
+- name: Create Interface Profile
+  aci_rest:
+    hostname: "{{ apic_host }}"
+    username: "{{ apic_username }}"
+    password: "{{ apic_password }}"
+    validate_certs: no
+    method: post
+    path: "/api/mo/uni/infra/funcprof.json"
+    content:
+      infraAccBndlGrp:
+        attributes:
+          name: "{{ interface_policy_group_name }}"
+          lagT: node
+        children: "{{ interface_policy_group_children }}"
